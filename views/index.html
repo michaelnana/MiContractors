@@ -1,0 +1,23 @@
+<html>
+<head>
+  <script src="http://code.jquery.com/jquery-2.1.4.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-animate.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-aria.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angular_material/0.9.4/angular-material.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.0/moment.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+  <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/0.9.4/angular-material.min.css">
+
+  <body data-ng-app="app" data-ng-controller="dashboardController as dashboard" data-ng-init="dashboard.init()">
+    <div>Welcome</div>
+    <div data-ng-repeat="company in dashboard.companies">
+      {{company.url}}
+    </div>
+    <script src="../app/app.js"></script>
+    <script src="../app/controllers/dashboard.controller.js"></script>
+    <script src="../scripts/companies-data.js"></script>
+  </body>
+</head>
+</html>
