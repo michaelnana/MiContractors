@@ -1,4 +1,25 @@
+body {
+    background-color:#EEEEEE;
+}
+
 .profile-details {
   font-size: 14px;
   font-weight: bold;
+}
+
+.company-image {
+  border: 1px solid #EEEEEE;
+  box-shadow: 1px 1px 1px #EEEEEE;
+}
+
+.lighter-well {
+  background-color: white;
+}
+
+.company-header {
+  margin-bottom: 2%;
+}
+
+.company-services {
+  font-size: 15px;
 }

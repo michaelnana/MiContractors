@@ -9,9 +9,11 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.0/moment.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
   <link rel="stylesheet" href="/styles/main.min.css">
+  <link rel="stylesheet" href="/styles/app.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
   <body data-ng-app="app" data-ng-controller="dashboardController as dashboard" data-ng-init="dashboard.init()">
+    <div data-ng-include="'/views/header.html'"></div>
     <div class="container">
     <div class="row">
       <div class="col-md-12">
@@ -21,7 +23,9 @@
               <div class="col-md-12">
                 <div class="col-md-6">
                   <div class="form-group">
-                      <input type="text" class="form-control" data-ng-model="dashboard.filterValue" placeholder="Filter by name">
+                      <input type="text" class="form-control" data-ng-model="dashboard.filterValue.name" placeholder="Filter by name">
+                      <input type="text" class="form-control" data-ng-model="dashboard.filterValue.avg_rating_cache" placeholder="Filter by average rating">
+                      <input type="text" class="form-control" data-ng-model="dashboard.filterValue.categories_info_cache" placeholder="Filter by category">
                   </div>
               </div>
               <div class="col-md-6">
@@ -38,6 +42,12 @@
                     By Average Rating
                   </label>
                 </div>
+                <div class="radio">
+                  <label>
+                    <input type="radio" name="company-sort" data-ng-click="dashboard.sortBy('category')">
+                    By Category
+                  </label>
+                </div>
               </div>
             </div>
           </div>
@@ -50,14 +60,25 @@
         <div class="panel-heading">
           <span class="panel-title"><a href="/companies/{{company.id}}">{{company.name}}</a></span>
           <span class="pull-right">
-            <a href="{{company.url}}" target="_blank">
-              <i class="fa fa-external-link" style="color: white">
+            <span class="badge">{{company.avg_rating_cache}} <i class="fa fa-star"></i></span>
+            <a class="badge" href="{{company.url}}" target="_blank">
+              Website
+              <i class="fa fa-external-link">
               </i>
             </a>
           </span>
         </div>
         <div class="panel-body">
-          {{company.url}}
+          <div class="row">
+            <div class="col-md-12">
+              <div class="col-md-2">
+                <img class="company-image img-circle" src="{{company.logo}}" width="75" height="75"/>
+              </div>
+              <div class="col-md-10">
+                {{company.profile}}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -66,7 +87,7 @@
     <script src="/app/app.js"></script>
     <script src="/assets/dirpagination/dirPagination.js"></script>
     <script src="/app/controllers/dashboard.controller.js"></script>
-    <script src="/assets/companies-data.js"></script>
+    <script src="/app/factory/companies.factory.js"></script>
   </body>
 </head>
 </html>
