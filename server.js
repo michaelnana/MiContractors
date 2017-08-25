@@ -19,5 +19,5 @@ app.get('/companies/:id', function (req, res) {
   res.sendFile(path.join(views + "company.html"));
 });
 
-app.listen(8080, function () {
+app.listen(process.env.PORT || 3000, function () {
 })
