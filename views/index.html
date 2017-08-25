@@ -23,9 +23,15 @@
               <div class="col-md-12">
                 <div class="col-md-6">
                   <div class="form-group">
-                      <input type="text" class="form-control" data-ng-model="dashboard.filterValue.name" placeholder="Filter by name">
-                      <input type="text" class="form-control" data-ng-model="dashboard.filterValue.avg_rating_cache" placeholder="Filter by average rating">
-                      <input type="text" class="form-control" data-ng-model="dashboard.filterValue.categories_info_cache" placeholder="Filter by category">
+                      <label>Filter</label>
+                      <select class="form-control" id="select" data-ng-model="dashboard.filter" data-ng-change="dashboard.changer();">
+                        <option value="name">By Name</option>
+                        <option value="rating">By Average Rating</option>
+                        <option value="category">By Category</option>
+                      </select>
+                      <input data-ng-if="dashboard.nameFilter" type="text" class="form-control" data-ng-model="dashboard.filterValue.name" placeholder="Filter name">
+                      <input data-ng-if="dashboard.ratingFilter" type="text" class="form-control" data-ng-model="dashboard.filterValue.avg_rating_cache" placeholder="Filter average rating">
+                      <input data-ng-if="dashboard.categoryFilter" type="text" class="form-control" data-ng-model="dashboard.filterValue.categories_info_cache" placeholder="Filter category">
                   </div>
               </div>
               <div class="col-md-6">
@@ -60,7 +66,7 @@
         <div class="panel-heading">
           <span class="panel-title"><a href="/companies/{{company.id}}">{{company.name}}</a></span>
           <span class="pull-right">
-            <span class="badge">{{company.avg_rating_cache}} <i class="fa fa-star"></i></span>
+            <span class="badge">{{company.avg_rating_cache | percentage}} <i class="fa fa-star"></i></span>
             <a class="badge" href="{{company.url}}" target="_blank">
               Website
               <i class="fa fa-external-link">
@@ -88,6 +94,7 @@
     <script src="/assets/dirpagination/dirPagination.js"></script>
     <script src="/app/controllers/dashboard.controller.js"></script>
     <script src="/app/factory/companies.factory.js"></script>
+    <script src="/app/filters/percentage.filter.js"></script>
   </body>
 </head>
 </html>

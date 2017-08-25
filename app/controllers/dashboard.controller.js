@@ -8,12 +8,34 @@ function DashboardController ($scope, companiesFactory) {
 
   dashboard.init = function () {
     dashboard.companies = companiesFactory.data();
+    dashboard.filter = 'name';
+    dashboard.nameFilter = true;
   }
 
   dashboard.filter = function () {
     dashboard.companies = _.filter(companiesFactory.data(), function (data) {
       return data.name == dashboard.filterValue;
     });
+  }
+
+  dashboard.changer = function () {
+    switch(dashboard.filter) {
+      case 'name':
+        dashboard.nameFilter = true;
+        dashboard.ratingFilter = false;
+        dashboard.categoryFilter = false;
+        break;
+      case 'rating':
+        dashboard.nameFilter = false;
+        dashboard.ratingFilter = true;
+        dashboard.categoryFilter = false;
+        break;
+      case 'category':
+        dashboard.nameFilter = false;
+        dashboard.ratingFilter = false;
+        dashboard.categoryFilter = true;
+        break;
+    }
   }
 
   dashboard.sortBy = function (value) {
