@@ -65,7 +65,7 @@
           <div class="panel-heading">
             <span class="panel-title"><a href="/companies/{{company.id}}">{{company.name}}</a></span>
             <span class="pull-right">
-              <span class="badge">{{company.avg_rating_cache | percentage}} <i class="fa fa-star"></i></span>
+              <span class="badge">{{company.avg_rating_cache | decimalPlaces}} <i class="fa fa-star"></i></span>
               <a class="badge" href="{{company.url}}" target="_blank">
                 Website
                 <i class="fa fa-external-link">
@@ -93,7 +93,7 @@
     <script src="/assets/dirpagination/dirPagination.js"></script>
     <script src="/app/controllers/dashboard.controller.js"></script>
     <script src="/app/factory/companies.factory.js"></script>
-    <script src="/app/filters/percentage.filter.js"></script>
+    <script src="/app/filters/decimal-places.filter.js"></script>
   </body>
 </head>
 </html>
