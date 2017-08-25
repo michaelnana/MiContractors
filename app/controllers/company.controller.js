@@ -1,4 +1,4 @@
-app.controller('companyController', ['$scope', 'companiesFactory', CompanyController]);
+angular.module('app').controller('companyController', ['$scope', 'companiesFactory', CompanyController]);
 
 function CompanyController ($scope, companiesFactory) {
   var company = this;

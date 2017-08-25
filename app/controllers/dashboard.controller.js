@@ -1,4 +1,4 @@
-app.controller('dashboardController', ['$scope', 'companiesFactory', DashboardController]);
+angular.module('app').controller('dashboardController', ['$scope', 'companiesFactory', DashboardController]);
 
 function DashboardController ($scope, companiesFactory) {
   var dashboard = this;
@@ -12,7 +12,7 @@ function DashboardController ($scope, companiesFactory) {
     dashboard.nameFilter = true;
   };
 
-  dashboard.changer = function () {
+  dashboard.switchFilter = function () {
     switch(dashboard.filter) {
       case 'name':
         dashboard.nameFilter = true;
@@ -33,24 +33,22 @@ function DashboardController ($scope, companiesFactory) {
   };
 
   dashboard.sortBy = function (value) {
-    if (value === 'name') {
-      dashboard.companies = _.sortBy(companiesFactory.data(), function (data) {
-        return data.name;
-      });
-    } else if (value === 'rating') {
+    switch(value) {
+      case 'name':
+        dashboard.companies = _.sortBy(companiesFactory.data(), function (data) {
+          return data.name;
+        });
+        break;
+      case 'rating':
       dashboard.companies = _.sortBy(companiesFactory.data(), function (data) {
         return data.avg_rating_cache;
       });
-    } else if (value === 'category') {
+        break;
+      case 'category':
       dashboard.companies = _.sortBy(companiesFactory.data(), function (data) {
         return data.categories_info_cache;
       });
+        break;
     }
-  };
-
-  function sortCompanies (value) {
-    return _.sortBy(companiesFactory.data(), function (data) {
-      return value;
-    });
   }
 }

@@ -4,10 +4,9 @@
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-animate.min.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-aria.min.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/angular_material/0.9.4/angular-material.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.0/moment.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-aria.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angular_material/0.9.4/angular-material.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
   <link rel="stylesheet" href="/styles/main.min.css">
   <link rel="stylesheet" href="/styles/app.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -15,16 +14,16 @@
   <body data-ng-app="app" data-ng-controller="dashboardController as dashboard" data-ng-init="dashboard.init()">
     <div data-ng-include="'/views/header.html'"></div>
     <div class="container">
-    <div class="row">
-      <div class="col-md-12">
-        <div class="panel panel-primary">
-          <div class="panel-body">
-            <div class="row">
-              <div class="col-md-12">
-                <div class="col-md-6">
-                  <div class="form-group">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="panel panel-primary">
+            <div class="panel-body">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="col-md-6">
+                    <div class="form-group">
                       <label>Filter</label>
-                      <select class="form-control" id="select" data-ng-model="dashboard.filter" data-ng-change="dashboard.changer();">
+                      <select class="form-control" id="select" data-ng-model="dashboard.filter" data-ng-change="dashboard.switchFilter();">
                         <option value="name">By Name</option>
                         <option value="rating">By Average Rating</option>
                         <option value="category">By Category</option>
@@ -32,64 +31,64 @@
                       <input data-ng-if="dashboard.nameFilter" type="text" class="form-control" data-ng-model="dashboard.filterValue.name" placeholder="Filter name">
                       <input data-ng-if="dashboard.ratingFilter" type="text" class="form-control" data-ng-model="dashboard.filterValue.avg_rating_cache" placeholder="Filter average rating">
                       <input data-ng-if="dashboard.categoryFilter" type="text" class="form-control" data-ng-model="dashboard.filterValue.categories_info_cache" placeholder="Filter category">
+                    </div>
                   </div>
-              </div>
-              <div class="col-md-6">
-                <label class="control-label">Sort</label>
-                <div class="radio">
-                  <label>
-                    <input type="radio" name="company-sort" data-ng-init="dashboard.sortBy('name')" data-ng-click="dashboard.sortBy('name')" checked="">
-                    By Name
-                  </label>
-                </div>
-                <div class="radio">
-                  <label>
-                    <input type="radio" name="company-sort" data-ng-click="dashboard.sortBy('rating')">
-                    By Average Rating
-                  </label>
-                </div>
-                <div class="radio">
-                  <label>
-                    <input type="radio" name="company-sort" data-ng-click="dashboard.sortBy('category')">
-                    By Category
-                  </label>
+                  <div class="col-md-6">
+                    <label class="control-label">Sort</label>
+                    <div class="radio">
+                      <label>
+                        <input type="radio" name="company-sort" data-ng-init="dashboard.sortBy('name')" data-ng-click="dashboard.sortBy('name')" checked="">
+                        By Name
+                      </label>
+                    </div>
+                    <div class="radio">
+                      <label>
+                        <input type="radio" name="company-sort" data-ng-click="dashboard.sortBy('rating')">
+                        By Average Rating
+                      </label>
+                    </div>
+                    <div class="radio">
+                      <label>
+                        <input type="radio" name="company-sort" data-ng-click="dashboard.sortBy('category')">
+                        By Category
+                      </label>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </div>
-    <div dir-paginate="company in dashboard.companies | filter: dashboard.filterValue | itemsPerPage: dashboard.pageSize" current-page="dashboard.currentPage">
-      <div class="panel panel-primary">
-        <div class="panel-heading">
-          <span class="panel-title"><a href="/companies/{{company.id}}">{{company.name}}</a></span>
-          <span class="pull-right">
-            <span class="badge">{{company.avg_rating_cache | percentage}} <i class="fa fa-star"></i></span>
-            <a class="badge" href="{{company.url}}" target="_blank">
-              Website
-              <i class="fa fa-external-link">
-              </i>
-            </a>
-          </span>
-        </div>
-        <div class="panel-body">
-          <div class="row">
-            <div class="col-md-12">
-              <div class="col-md-2">
-                <img class="company-image img-circle" src="{{company.logo}}" width="75" height="75"/>
-              </div>
-              <div class="col-md-10">
-                {{company.profile}}
+      <div dir-paginate="company in dashboard.companies | filter: dashboard.filterValue | itemsPerPage: dashboard.pageSize" current-page="dashboard.currentPage">
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <span class="panel-title"><a href="/companies/{{company.id}}">{{company.name}}</a></span>
+            <span class="pull-right">
+              <span class="badge">{{company.avg_rating_cache | percentage}} <i class="fa fa-star"></i></span>
+              <a class="badge" href="{{company.url}}" target="_blank">
+                Website
+                <i class="fa fa-external-link">
+                </i>
+              </a>
+            </span>
+          </div>
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="col-md-2">
+                  <img class="company-image img-circle" src="{{company.logo}}" width="75" height="75"/>
+                </div>
+                <div class="col-md-10 profile-details">
+                  {{company.profile | limitTo: 500}}{{company.profile.length > 500 ? ' ...' : ''}}
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
+      <dir-pagination-controls boundary-links="true" on-page-change="" template-url="/assets/dirpagination/dirPagination.tpl.html"></dir-pagination-controls>
     </div>
-    <dir-pagination-controls boundary-links="true" on-page-change="" template-url="/assets/dirpagination/dirPagination.tpl.html"></dir-pagination-controls>
-  </div>
     <script src="/app/app.js"></script>
     <script src="/assets/dirpagination/dirPagination.js"></script>
     <script src="/app/controllers/dashboard.controller.js"></script>
