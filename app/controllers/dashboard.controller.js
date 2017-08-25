@@ -4,19 +4,13 @@ function DashboardController ($scope, companiesFactory) {
   var dashboard = this;
   dashboard.companies = [];
   dashboard.currentPage = 1;
-  dashboard.pageSize = 10;
+  dashboard.pageSize = 20;
 
   dashboard.init = function () {
     dashboard.companies = companiesFactory.data();
     dashboard.filter = 'name';
     dashboard.nameFilter = true;
-  }
-
-  dashboard.filter = function () {
-    dashboard.companies = _.filter(companiesFactory.data(), function (data) {
-      return data.name == dashboard.filterValue;
-    });
-  }
+  };
 
   dashboard.changer = function () {
     switch(dashboard.filter) {
@@ -36,7 +30,7 @@ function DashboardController ($scope, companiesFactory) {
         dashboard.categoryFilter = true;
         break;
     }
-  }
+  };
 
   dashboard.sortBy = function (value) {
     if (value === 'name') {
