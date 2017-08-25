@@ -19,5 +19,5 @@ app.get('/companies/:id', function (req, res) {
   res.sendFile(path.join(views + "company.html"));
 });
 
-app.listen(80, function () {
+app.listen(8080, function () {
 })
