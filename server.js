@@ -5,6 +5,7 @@ const angularApp = __dirname +"/app/";
 const assets = __dirname +"/assets/";
 const styles = __dirname +"/styles/";
 const path = require('path');
+const port = process.env.PORT || 3000;
 
 app.use('/views', express.static(views));
 app.use('/app', express.static(angularApp));
@@ -19,5 +20,6 @@ app.get('/companies/:id', function (req, res) {
   res.sendFile(path.join(views + "company.html"));
 });
 
-app.listen(process.env.PORT || 3000, function () {
+app.listen(port, function () {
+  console.log("Listening on port " + port);
 })
